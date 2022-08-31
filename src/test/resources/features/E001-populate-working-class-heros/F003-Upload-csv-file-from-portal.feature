@@ -10,15 +10,17 @@ Feature: Upload CSV file from portal
       AC3: A simple button that allows me to upload a file on my pc to the
       portal
   """
+
   Background:
     Given As the Clerk, I want to opened the Oppenheimer portal page
+    Then As the Clerk, I arrived at Oppenheimer portal page
 
   @portal
   Scenario: Upload CSV file from portal successfully
-    When As the Clerk, I want to upload a csv file which is "list-of-working-class-heroes.csv" to a portal
+    When As the Clerk, I want to upload a csv file is "list-of-working-class-heroes.csv" to portal
     And As the Clerk, I want to refresh tax relief table
     Then QA verify the list of working class heroes and their tax relief is populated to table:
-      | NatId      | Relief |
-      | 123-$$$$$$ | 50.00  |
-      | 456-$$$$$$ | 60.00  |
+      | NatId     | Relief   |
+      | 999-$$$$$ | 32463.53 |
+      | 888-$$$$$ | 44950.00 |
 

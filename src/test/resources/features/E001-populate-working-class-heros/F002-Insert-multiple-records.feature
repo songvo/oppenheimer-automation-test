@@ -2,7 +2,7 @@ Feature: As the Clerk, I should be able to insert more than one working class he
 
   @service
   Scenario: Insert multiple records successfully
-    When As the Clerk, I want to insert multiple record(s) of working class hero as following details:
+    When As the Clerk, I want to insert multiple records of working class hero as following details:
       | natid       | name        | gender | birthday | salary     | tax    |
       | 789-1234567 | Leo Park    | M      | 01011990 | 7000000.00 | 678.90 |
       | 456-9876543 | Henry Rob   | F      | 09092000 | 2345678.89 | 345.90 |

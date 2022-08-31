@@ -9,6 +9,7 @@ that I can dispense tax relief for my working class heroes
   """
   Background:
     Given As the Governor, I want to opened the Oppenheimer portal page
+    Then As the Governor, I arrived at Oppenheimer portal page
 
   @portal
   Scenario: Dispense tax relief successfully

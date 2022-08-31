@@ -4,6 +4,7 @@ import com.oppenheimer.bdd.Context;
 import com.oppenheimer.bdd.ScenarioContext;
 import com.oppenheimer.entities.WorkingClassHero;
 import com.oppenheimer.services.InsertPersonService;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class InsertPersonServiceSteps {
     @Autowired
     private ScenarioContext scenarioContext;
 
-    @When("As the Clerk, I want to insert {recordType} record\\(s) of working class hero as following details:")
+    @When("As the Clerk, I want to insert {recordType} record(s) of working class hero as following details:")
     public void insertWorkingClassHeroes(String type, List<WorkingClassHero> workingClassHeroList) {
         Response response;
         switch (type) {
@@ -35,4 +36,5 @@ public class InsertPersonServiceSteps {
         }
         scenarioContext.put(Context.RESPONSE, response);
     }
+
 }
