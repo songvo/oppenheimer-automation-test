@@ -1,6 +1,7 @@
 package com.oppenheimer.bdd;
 
-import com.oppenheimer.helpers.ScreenshotHelper;
+import com.oppenheimer.utils.ScreenshotUtils;
+import com.oppenheimer.services.InsertPersonService;
 import io.cucumber.java.*;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,10 @@ public class Hooks {
     private ApplicationContext applicationContext;
 
     @Autowired
-    private ScreenshotHelper screenshotService;
+    private ScreenshotUtils screenshotService;
+
+    @Autowired
+    private InsertPersonService insertPersonService;
 
     public static ThreadLocal<Scenario> scenarios = new ThreadLocal<>();
 
@@ -35,6 +39,7 @@ public class Hooks {
 
     @After("@api")
     public void teardownForServices(Scenario scenario) {
+        this.insertPersonService.rakeDatabase(); // Clear database
     }
 
     @Before("@ui")
@@ -49,5 +54,6 @@ public class Hooks {
             scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
         }
         this.applicationContext.getBean(WebDriver.class).quit();
+        this.insertPersonService.rakeDatabase(); // Clear database
     }
 }

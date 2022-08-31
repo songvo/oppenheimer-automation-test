@@ -1,4 +1,4 @@
-package com.oppenheimer.helpers;
+package com.oppenheimer.utils;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Lazy
 @Service
-public class ScreenshotHelper {
+public class ScreenshotUtils {
     @Autowired
     private ApplicationContext ctx;
 
