@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan({"com.ninjavan"})
+@ComponentScan({"com.oppenheimer"})
 public class CucumberTestConfig {
     @Bean
     public ObjectMapper objectMapper() {
