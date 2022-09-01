@@ -1,6 +1,6 @@
 package com.oppenheimer.bdd;
 
-import com.oppenheimer.services.InsertPersonService;
+import com.oppenheimer.services.CalculatorControllerService;
 import com.oppenheimer.utils.ScreenshotUtils;
 import io.cucumber.java.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ public class Hooks {
     private ScreenshotUtils screenshotService;
 
     @Autowired
-    private InsertPersonService insertPersonService;
+    private CalculatorControllerService calculatorControllerService;
 
     public static ThreadLocal<Scenario> scenarios = new ThreadLocal<>();
 
@@ -35,7 +35,7 @@ public class Hooks {
     public void setup(Scenario scenario) {
         log.info(String.format("[Thread %2d] Running -> [Scenario: %s]%n",
                 Thread.currentThread().getId(), scenario.getName()));
-                this.insertPersonService.rakeDatabase(); // Clear database
+        this.calculatorControllerService.rakeDatabase(); // Clear database
 
     }
 
@@ -43,12 +43,12 @@ public class Hooks {
 //    public void teardownForServices(Scenario scenario) {
 //    }
 
-//    @After("@portal")
+    //    @After("@portal")
     @After
     public void teardown(Scenario scenario) {
-        if (scenario.isFailed()) {
-            scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
-        }
-//        this.applicationContext.getBean(WebDriver.class).quit();
+//        if (scenario.isFailed()) {
+//            scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
+//        }
+        this.applicationContext.getBean(WebDriver.class).quit();
     }
 }

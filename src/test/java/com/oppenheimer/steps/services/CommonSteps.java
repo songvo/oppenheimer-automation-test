@@ -3,7 +3,6 @@ package com.oppenheimer.steps.services;
 import com.oppenheimer.bdd.Context;
 import com.oppenheimer.bdd.ScenarioContext;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import lombok.SneakyThrows;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -25,7 +24,7 @@ public class CommonSteps {
     @Then("QA verifies that the HTTP response body as json:")
     public void qaVerifiesThatTheHTTPResponseBodyIs(String expectedJson) {
         Response response = scenarioContext.get(Context.RESPONSE);
-        JSONAssert.assertEquals(expectedJson, response.getBody().asString(),false);
+        JSONAssert.assertEquals(expectedJson, response.getBody().asString(), false);
     }
 
     @SneakyThrows

@@ -37,6 +37,10 @@ public class PortalPage extends Base{
         this.uploadCSVFileInput.sendKeys(filePath);
     }
 
+    public void getTheFirstRowOfFile() {
+
+    }
+
     public void refreshTaxReliefTable() {
         this.refreshTaxReliefTableButton.click();
     }

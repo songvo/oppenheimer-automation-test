@@ -31,6 +31,8 @@ public class PortalSteps {
     public void uploadACsvFileToPortal(String fileName) {
         String filePath = System.getProperty("user.dir")
                 + "/src/test/resources/data/" + fileName;
+
+        portalPage.getTheFirstRowOfFile();//todo: Verify the first row
         portalPage.uploadFile(filePath);
     }
 

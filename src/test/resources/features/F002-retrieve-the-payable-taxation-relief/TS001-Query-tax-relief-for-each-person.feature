@@ -25,17 +25,28 @@ Feature: As the Bookkeeper, I should be able to query the amount of tax
   """
 
   Background:
-    # Import some data
+    When As the Clerk, I want to upload a csv file is "list-of-working-class-heroes.csv" using api
 
   @service
   Scenario: Query tax relief successfully
     When As the Bookkeeper, I want to query the amount of tax relief for each person
-    Then QA verifies that the HTTP response code is 202
-    And QA verifies that the HTTP response body is:
+    Then QA verifies that the HTTP response code is 200
+    And QA verifies that the HTTP response body as json:
     """
-      Alright
+    [
+      {
+          "natid": "999-$$$$$",
+          "name": "Henry Henry",
+          "relief": "32463.53"
+      },
+      {
+          "natid": "888-$$$$$",
+          "name": "Bamboo Bamboo",
+          "relief": "44950.00"
+      }
+    ]
     """
-    And QA verifies that NatId field must be masked from the 5th character
-    And QA verify that Calculated tax relief amount after subjecting to normal rounding rule
-    # How to apply the round up rules????? => Already verify response why should verify it
-  # Input as a list of data => map loop to format the data to expected
+#    And QA verifies that NatId field must be masked from the 5th character
+#    And QA verify that Calculated tax relief amount after subjecting to normal rounding rule
+#    # How to apply the round up rules????? => Already verify response why should verify it
+#  # Input as a list of data => map loop to format the data to expected
