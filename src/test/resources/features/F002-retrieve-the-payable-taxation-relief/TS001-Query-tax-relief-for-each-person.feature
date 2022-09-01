@@ -46,7 +46,7 @@ Feature: As the Bookkeeper, I should be able to query the amount of tax
       }
     ]
     """
-#    And QA verifies that NatId field must be masked from the 5th character
-#    And QA verify that Calculated tax relief amount after subjecting to normal rounding rule
+    And QA verifies that NatId field must be masked from the 5th character
+    And QA verify that Calculated tax relief amount after subjecting to normal rounding rule
 #    # How to apply the round up rules????? => Already verify response why should verify it
 #  # Input as a list of data => map loop to format the data to expected

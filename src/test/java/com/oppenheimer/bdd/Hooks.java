@@ -49,6 +49,6 @@ public class Hooks {
 //        if (scenario.isFailed()) {
 //            scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
 //        }
-        this.applicationContext.getBean(WebDriver.class).quit();
+//        this.applicationContext.getBean(WebDriver.class).quit();
     }
 }

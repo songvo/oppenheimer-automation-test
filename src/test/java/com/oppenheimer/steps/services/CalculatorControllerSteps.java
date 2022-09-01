@@ -4,6 +4,8 @@ import com.oppenheimer.bdd.Context;
 import com.oppenheimer.bdd.ScenarioContext;
 import com.oppenheimer.entities.WorkingClassHero;
 import com.oppenheimer.services.CalculatorControllerService;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,22 @@ public class CalculatorControllerSteps {
         String filePath = System.getProperty("user.dir")
                 + "/src/test/resources/data/" + fileName;
         Response response = calculatorControllerService.uploadLargeFile(filePath);
+        scenarioContext.put(Context.RESPONSE, response);
+    }
+
+    @And("QA verifies that NatId field must be masked from the 5th character")
+    public void qaVerifiesThatNatIdFieldMustBeMaskedFromTheThCharacter() {
+        //todo
+    }
+
+    @And("QA verify that Calculated tax relief amount after subjecting to normal rounding rule")
+    public void qaVerifyThatCalculatedTaxReliefAmountAfterSubjectingToNormalRoundingRule() {
+        //todo
+    }
+
+    @Given("As the Governor, I want to insert {int} random to database")
+    public void asTheGovernorIWantToInsertRandomToDatabase(int count) {
+        Response response = calculatorControllerService.insertRandomToDatabase(count);
         scenarioContext.put(Context.RESPONSE, response);
     }
 }

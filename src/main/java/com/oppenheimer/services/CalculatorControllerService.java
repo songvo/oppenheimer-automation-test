@@ -30,6 +30,9 @@ public class CalculatorControllerService {
     @Value("${calculatorCtrl.uploadLargeFile.endpoint}")
     private String uploadLargeFileEndpoint;
 
+    @Value("${calculatorCtrl.insertRandomToDatabase.endpoint}")
+    private String insertRandomToDatabaseEndpoint;
+
     @Value("${host}")
     private String host;
 
@@ -80,5 +83,14 @@ public class CalculatorControllerService {
                 .body("")
                 .when()
                 .post(uploadLargeFileEndpoint);
+    }
+
+    public Response insertRandomToDatabase(int count) {
+        return given()
+                .header("Content-Type", "application/json")
+                .queryParam("count", count)
+                .body("")
+                .when()
+                .post(insertRandomToDatabaseEndpoint);
     }
 }

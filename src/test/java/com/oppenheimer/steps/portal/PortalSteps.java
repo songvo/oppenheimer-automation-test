@@ -1,5 +1,6 @@
 package com.oppenheimer.steps.portal;
 
+import com.oppenheimer.configs.Color;
 import com.oppenheimer.pages.PortalPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -50,5 +51,19 @@ public class PortalSteps {
             assertThat(portalPage.getReliefTableCellData(col + 1, 2))
                     .isEqualTo(dataList.get(col).get("Relief"));
         }
+    }
+
+    @Then("As the Governor, I should be able to see a button on the screen")
+    public void asTheGovernorIShouldBeAbleToSeeAButtonOnTheScreen(DataTable dataTable) {
+        List<Map<String, String>> dataList = dataTable.asMaps();
+        assertThat(portalPage.getDispenseTaxReliefButtonText())
+                .isEqualTo(dataList.get(0).get("text"));
+        assertThat(portalPage.getDispenseTaxReliefColor())
+                .isEqualTo(Color.valueOf(dataList.get(0).get("color")).getColorCode());
+    }
+
+    @When("As the Governor, I can dispense tax relief for my working class heroes")
+    public void asTheGovernorICanDispenseTaxReliefForMyWorkingClassHeroes() {
+        portalPage.clickDispenseTaxReliefButton();
     }
 }
