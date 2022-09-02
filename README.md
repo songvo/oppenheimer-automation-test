@@ -39,7 +39,7 @@
 * Support multiple browsers chrome, edge, safari, ....
 * Generate report after run `CucumberTestRunner` or `cucumberCli task`
   * Refer example report in target > cucumber
-* Run parallel with 2 threads which is config in `cucumberCli task` in `build.gradle`
+* Run parallel with multi threads which is config in `cucumberCli task` in `build.gradle`
 * Take screenshot and attach to report
 * Able to run with different tags
 * Call the API and verify the response

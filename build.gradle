@@ -37,9 +37,6 @@ dependencies {
     implementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.13.3'
 
-    // Read pdf
-    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.26'
-
 }
 
 
@@ -61,7 +58,7 @@ task cucumberCli() {
                     '--plugin', 'html:target/cucumber/cucumber-report.html',
                     '--tags', tags,
                     'src/test/resources',
-                    '--threads', 2]
+                    '--threads', 1]
         }
     }
 }

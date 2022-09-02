@@ -21,16 +21,6 @@ public class Hooks {
 
     public static ThreadLocal<Scenario> scenarios = new ThreadLocal<>();
 
-    @BeforeAll
-    public static void beforeAll() {
-
-    }
-
-    @AfterAll
-    public static void afterAll() {
-
-    }
-
     @Before
     public void setup(Scenario scenario) {
         log.info(String.format("[Thread %2d] Running -> [Scenario: %s]%n",
@@ -39,16 +29,16 @@ public class Hooks {
 
     }
 
-//    @After("@service")
-//    public void teardownForServices(Scenario scenario) {
-//    }
+    @After("@service")
+    public void teardownForServices(Scenario scenario) {
+        this.applicationContext.getBean(WebDriver.class).quit();
+    }
 
-    //    @After("@portal")
-    @After
+    @After("@portal")
     public void teardown(Scenario scenario) {
-//        if (scenario.isFailed()) {
-//            scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
-//        }
+        if (scenario.isFailed()) {
+            scenario.attach(this.screenshotService.getScreenshot(), "image/png", "***** Screenshot attachment *****");
+        }
         this.applicationContext.getBean(WebDriver.class).quit();
     }
 }
