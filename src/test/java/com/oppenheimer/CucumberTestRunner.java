@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "pretty",
                 "html:target/cucumber/cucumber-report.html"
         },
-        tags = "@dashboard"
+        tags = "@regression"
 )
 public class CucumberTestRunner {
 
