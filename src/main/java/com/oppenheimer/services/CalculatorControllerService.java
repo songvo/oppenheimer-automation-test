@@ -105,7 +105,7 @@ public class CalculatorControllerService {
 
     private TaxRelief calculateTaxRelief(WorkingClassHero workingClassHero) {
         return TaxRelief.builder()
-                .natid(TaxReliefUtils.natIdTransfer(workingClassHero.getNatid()))
+                .natid(TaxReliefUtils.maskedNatIdFrom5thChar(workingClassHero.getNatid()))
                 .name(workingClassHero.getName())
                 .relief(TaxReliefUtils.taxReliefCalculator(workingClassHero).toString())
                 .build();

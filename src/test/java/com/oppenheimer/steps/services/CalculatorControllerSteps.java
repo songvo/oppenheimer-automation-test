@@ -1,5 +1,6 @@
 package com.oppenheimer.steps.services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oppenheimer.bdd.Context;
 import com.oppenheimer.bdd.ScenarioContext;
@@ -10,6 +11,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -64,10 +66,11 @@ public class CalculatorControllerSteps {
         scenarioContext.put(Context.RESPONSE, response);
     }
 
+    @SneakyThrows
     @And("QA verifies that natid must be masked and calculated tax relief must be rounded correctly")
     public void natidMustBeMaskedAndCalculatedTaxReliefMustBeRoundedCorrectly() {
         Response response = scenarioContext.get(Context.RESPONSE);
-        TaxRelief[] actualTaxRelief = response.body().as(TaxRelief[].class);
+        List<TaxRelief> actualTaxRelief = objectMapper.readValue(response.getBody().asString(), new TypeReference<>(){});
 
         List<WorkingClassHero> workingClassHeroList = scenarioContext.get(Context.REQUEST_BODY);
         List<TaxRelief> expectedTaxReliefs = calculatorControllerService.calculateTaxReliefList(workingClassHeroList);

@@ -3,10 +3,6 @@ Feature: As the Bookkeeper, I should be able to query the amount of tax
   figures to my Bookkeeping Manager
 
   """
-  (4) As the Bookkeeper, I should be able to query the amount of tax
-    relief for each person in the database so that I can report the
-    figures to my Bookkeeping Manager
-
     AC1: a GET endpoint which returns a list consist of natid, tax relief
       amount and name
       AC2: natid field must be masked from the 5th character onwards with
@@ -26,27 +22,27 @@ Feature: As the Bookkeeper, I should be able to query the amount of tax
 
   Background:
     When As the QA, I want to insert multiple records of working class hero as following details:
-      | natid       | name        | gender | birthday | salary     | tax    |
-      | 789-1234567 | Leo Park    | M      | 01011990 | 7000000.00 | 678.90 |
-      | 456-9876543 | Henry Rob   | F      | 09092000 | 2345678.89 | 345.90 |
+      | natid       | name      | gender | birthday | salary    | tax    |
+      | 789-1234567 | Leo Park  | M      | 01011990 | 700.00    | 678.90 |
+      | 456-9876543 | Henry Rob | F      | 09092000 | 150000.00 | 1500   |
 
   @service @regression
   Scenario: Query tax relief successfully
     When As the Bookkeeper, I want to query the amount of tax relief for each person
     Then QA verifies that the HTTP response code is 200
+    And QA verifies that natid must be masked and calculated tax relief must be rounded correctly
     And QA verifies that the HTTP response body as json:
     """
     [
         {
             "natid": "789-$$$$$$$",
             "name": "Leo Park",
-            "relief": "5599456.89"
+            "relief": "50.00"
         },
         {
             "natid": "456-$$$$$$$",
             "name": "Henry Rob",
-            "relief": "1876766.00"
+            "relief": "119300.00"
         }
     ]
     """
-    And QA verifies that natid must be masked and calculated tax relief must be rounded correctly
