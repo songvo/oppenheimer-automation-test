@@ -52,6 +52,5 @@
 * Using different profile for each environment ex st, sit1, sit2,...
 * AssertJ is awesome lib for assertion
 * RestAssure for sending the API
-* PDFBox for reading pdf file
 * Log4j to log to file
 

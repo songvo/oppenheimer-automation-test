@@ -25,28 +25,28 @@ Feature: As the Bookkeeper, I should be able to query the amount of tax
   """
 
   Background:
-    When As the Clerk, I want to upload a csv file is "list-of-working-class-heroes.csv" using api
+    When As the QA, I want to insert multiple records of working class hero as following details:
+      | natid       | name        | gender | birthday | salary     | tax    |
+      | 789-1234567 | Leo Park    | M      | 01011990 | 7000000.00 | 678.90 |
+      | 456-9876543 | Henry Rob   | F      | 09092000 | 2345678.89 | 345.90 |
 
-  @service
+  @service @regression
   Scenario: Query tax relief successfully
     When As the Bookkeeper, I want to query the amount of tax relief for each person
     Then QA verifies that the HTTP response code is 200
     And QA verifies that the HTTP response body as json:
     """
     [
-      {
-          "natid": "999-$$$$$",
-          "name": "Henry Henry",
-          "relief": "32463.53"
-      },
-      {
-          "natid": "888-$$$$$",
-          "name": "Bamboo Bamboo",
-          "relief": "44950.00"
-      }
+        {
+            "natid": "789-$$$$$$$",
+            "name": "Leo Park",
+            "relief": "5599456.89"
+        },
+        {
+            "natid": "456-$$$$$$$",
+            "name": "Henry Rob",
+            "relief": "1876766.00"
+        }
     ]
     """
-    And QA verifies that NatId field must be masked from the 5th character
-    And QA verify that Calculated tax relief amount after subjecting to normal rounding rule
-#    # How to apply the round up rules????? => Already verify response why should verify it
-#  # Input as a list of data => map loop to format the data to expected
+    And QA verifies that natid must be masked and calculated tax relief must be rounded correctly

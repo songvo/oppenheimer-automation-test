@@ -33,7 +33,7 @@ public class PortalSteps {
         String filePath = System.getProperty("user.dir")
                 + "/src/test/resources/data/" + fileName;
 
-        portalPage.getTheFirstRowOfFile();//todo: Verify the first row
+        portalPage.getTheFirstRowOfFile();//todo
         portalPage.uploadFile(filePath);
     }
 

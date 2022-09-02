@@ -1,7 +1,9 @@
 package com.oppenheimer.steps.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oppenheimer.bdd.Context;
 import com.oppenheimer.bdd.ScenarioContext;
+import com.oppenheimer.entities.TaxRelief;
 import com.oppenheimer.entities.WorkingClassHero;
 import com.oppenheimer.services.CalculatorControllerService;
 import io.cucumber.java.en.And;
@@ -21,7 +23,10 @@ public class CalculatorControllerSteps {
     @Autowired
     private ScenarioContext scenarioContext;
 
-    @When("As the Clerk, I want to insert {recordType} record(s) of working class hero as following details:")
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @When("As the Clerk,/QA, I want to insert {recordType} record(s) of working class hero as following details:")
     public void insertWorkingClassHeroes(String type, List<WorkingClassHero> workingClassHeroList) {
         Response response;
         switch (type) {
@@ -36,6 +41,7 @@ public class CalculatorControllerSteps {
                 throw new RuntimeException("Type not found");
         }
         scenarioContext.put(Context.RESPONSE, response);
+        scenarioContext.put(Context.REQUEST_BODY, workingClassHeroList);
     }
 
     @When("As the Bookkeeper, I want to query the amount of tax relief for each person")
@@ -45,26 +51,27 @@ public class CalculatorControllerSteps {
     }
 
     @When("As the Clerk, I want to upload a csv file is {string} using api")
-    public void asTheClerkIWantToUploadACsvFileIsUsingApi(String fileName) {
+    public void uploadACsvFileIsUsingApi(String fileName) {
         String filePath = System.getProperty("user.dir")
                 + "/src/test/resources/data/" + fileName;
         Response response = calculatorControllerService.uploadLargeFile(filePath);
         scenarioContext.put(Context.RESPONSE, response);
     }
 
-    @And("QA verifies that NatId field must be masked from the 5th character")
-    public void qaVerifiesThatNatIdFieldMustBeMaskedFromTheThCharacter() {
-        //todo
-    }
-
-    @And("QA verify that Calculated tax relief amount after subjecting to normal rounding rule")
-    public void qaVerifyThatCalculatedTaxReliefAmountAfterSubjectingToNormalRoundingRule() {
-        //todo
-    }
-
     @Given("As the Governor, I want to insert {int} random to database")
-    public void asTheGovernorIWantToInsertRandomToDatabase(int count) {
+    public void insertRandomToDatabase(int count) {
         Response response = calculatorControllerService.insertRandomToDatabase(count);
         scenarioContext.put(Context.RESPONSE, response);
+    }
+
+    @And("QA verifies that natid must be masked and calculated tax relief must be rounded correctly")
+    public void natidMustBeMaskedAndCalculatedTaxReliefMustBeRoundedCorrectly() {
+        Response response = scenarioContext.get(Context.RESPONSE);
+        TaxRelief[] actualTaxRelief = response.body().as(TaxRelief[].class);
+
+        List<WorkingClassHero> workingClassHeroList = scenarioContext.get(Context.REQUEST_BODY);
+        List<TaxRelief> expectedTaxReliefs = calculatorControllerService.calculateTaxReliefList(workingClassHeroList);
+
+        assertThat(actualTaxRelief).usingRecursiveComparison().isEqualTo(expectedTaxReliefs);
     }
 }

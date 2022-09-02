@@ -15,7 +15,7 @@ Feature: Upload CSV file from portal
     Given As the Clerk, I want to opened the Oppenheimer portal page
     Then As the Clerk, I arrived at Oppenheimer portal page
 
-  @portal
+  @portal @regression
   Scenario: Upload CSV file from portal successfully
     When As the Clerk, I want to upload a csv file is "list-of-working-class-heroes.csv" to portal
     And As the Clerk, I want to refresh tax relief table

@@ -7,7 +7,7 @@ Feature: As the Governor, I should be able to see a button on the screen so
     Given As the Governor, I want to opened the Oppenheimer portal page
     Then As the Governor, I arrived at Oppenheimer portal page
 
-  @portal
+  @portal @regression
   Scenario: Dispense tax relief successfully
     Then As the Governor, I should be able to see a button on the screen
       | text         | color |

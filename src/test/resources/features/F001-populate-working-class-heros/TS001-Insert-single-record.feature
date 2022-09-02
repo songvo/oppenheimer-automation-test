@@ -1,6 +1,6 @@
 Feature: As the Clerk, I should be able to insert a single record of working class hero into database via an API
 
-  @service
+  @service @regression
   Scenario: Insert single record successfully
     When As the Clerk, I want to insert single record of working class hero as following details:
       | natid       | name     | gender | birthday | salary  | tax  |

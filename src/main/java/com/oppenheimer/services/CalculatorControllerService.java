@@ -1,6 +1,8 @@
 package com.oppenheimer.services;
 
+import com.oppenheimer.entities.TaxRelief;
 import com.oppenheimer.entities.WorkingClassHero;
+import com.oppenheimer.utils.TaxReliefUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 
@@ -92,5 +95,19 @@ public class CalculatorControllerService {
                 .body("")
                 .when()
                 .post(insertRandomToDatabaseEndpoint);
+    }
+
+    public List<TaxRelief> calculateTaxReliefList(List<WorkingClassHero> workingClassHeroList) {
+        return workingClassHeroList.stream()
+                .map(this::calculateTaxRelief)
+                .collect(Collectors.toList());
+    }
+
+    private TaxRelief calculateTaxRelief(WorkingClassHero workingClassHero) {
+        return TaxRelief.builder()
+                .natid(TaxReliefUtils.natIdTransfer(workingClassHero.getNatid()))
+                .name(workingClassHero.getName())
+                .relief(TaxReliefUtils.taxReliefCalculator(workingClassHero).toString())
+                .build();
     }
 }
