@@ -12,18 +12,19 @@
 
 ## Installation
 1. Install the softwares on your machine: Java, Git
-2. Clone the source:
+2. Start the oppenheimer-project-dev server following https://github.com/auronsiow/oppenheimer-project-dev
+3. Clone the source:
    ```bash
     git clone https://github.com/songvo/oppenheimer-automation-test.git
    ```
-3. Navigate to `oppenheimer-automation-test` project folder
-4. Change `browser.download` property in `application.properties` file to your browser setting
-5. Run this command line which means "run all the tests with tags is @regression"
+4. Navigate to `oppenheimer-automation-test` project folder
+5. Change `browser.download` property in `application.properties` file to your browser setting
+6. Run this command line which means "run all the tests with tags is @regression"
    ```bash
    ./gradlew cucumberCli -Ptags='@regression'
    ```
-6. The report will generate in `target > cucumber > cucumber-report.html`. There are some example reports here
-7. The feature files is in `main > test > resources > features`
+7. The report will generate in `target > cucumber > cucumber-report.html`. There are some example reports here
+8. The feature files is in `main > test > resources > features`
 
 ## How to run and debug on IDE
 1. Install IntelliJ

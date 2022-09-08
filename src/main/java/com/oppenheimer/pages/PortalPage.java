@@ -3,6 +3,7 @@ package com.oppenheimer.pages;
 import com.oppenheimer.annotations.Page;
 import com.oppenheimer.elements.NormalTable;
 import com.oppenheimer.elements.Table;
+import com.oppenheimer.utils.JavaScriptUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
@@ -47,11 +48,12 @@ public class PortalPage extends Base{
     }
 
     public void refreshTaxReliefTable() {
+        JavaScriptUtils.scrollToElement(refreshTaxReliefTableButton, driver);
         this.refreshTaxReliefTableButton.click();
     }
 
     public String getReliefTableCellData(int colStartFrom1, int rowStartFrom1) {
-        Table reliefTable = new NormalTable(reliefTableElm);
+        Table reliefTable = new NormalTable(reliefTableElm, this.driver);
         return reliefTable.getCellTextByIndex(colStartFrom1, rowStartFrom1);
     }
 
